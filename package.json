@@ -1,0 +1,24 @@
+{
+  "name": "sushi.js",
+  "version": "0.0.1",
+  "description": "A simple modular JavaScript Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Walraz/sushi.js.git"
+  },
+  "keywords": [
+    "library",
+    "sushi.js",
+    "sushi"
+  ],
+  "author": "Rasmus Hallström",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Walraz/sushi.js/issues"
+  },
+  "homepage": "https://github.com/Walraz/sushi.js#readme"
+}

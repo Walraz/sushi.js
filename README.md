@@ -1,2 +1,2 @@
 # sushi.js
-A simple module JavaScript Library
+A simple modular JavaScript Library
