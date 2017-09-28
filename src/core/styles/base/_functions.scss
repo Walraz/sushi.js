@@ -1,0 +1,19 @@
+@function theme($key) {
+    @return map-get($theme, $key);
+}
+
+@function color($key) {
+    @return map-get($colors, $key);
+}
+
+@function background($key) {
+    @return map-get($backgrounds, $key);
+}
+
+@function tint($color, $percent) {
+    @return mix(white, $color, $percent);
+}
+
+@function shade($color, $percent) {
+    @return mix(black, $color, $percent);
+}

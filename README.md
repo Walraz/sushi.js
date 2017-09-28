@@ -14,7 +14,7 @@ In your applications main entry point add:
 
 ```javascript
 import Vue from 'vue'
-import 'sushi/core/styles/main.scss';
+import 'sushi.js/dist/main.css';
 import Sushi from 'sushi.js'
 
 Vue.use(Sushi)
@@ -30,18 +30,17 @@ Vue.use(Sushi)
 
   ```html
   <style lang="scss">
-     $primary: red;
-     @import 'sushi/core/styles/main.scss';
+    $primary: limegreen;
+    @import '~sushi.js/src/core/styles/main.scss';
   </style>
   ```
-
   or
   1. Create a .scss file with this content (The order of @import is important)
   ```scss
   $primary: red; 
   @import 'sushi/core/styles/main.scss';
   ```
-  2. import your created .scss file BEFORE `import 'sushi/core/styles/main.scss'`
+  2. import your created .scss file BEFORE `import 'sushi.js/core/styles/main.scss'`
 
 
 ## Contributing

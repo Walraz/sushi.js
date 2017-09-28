@@ -1,0 +1,10 @@
+$primary: #0000ff !default;
+
+$primary-tint: tint($primary, 20%);
+$primary-shade: shade($primary, 20%);
+
+$theme: (
+    primary: $primary,
+    primaryTint: $primary-tint,
+    primaryShade: $primary-shade
+);

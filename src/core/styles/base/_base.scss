@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import '~normalize.css';
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: rgba(#000, 0.87);
+    line-height: normal;
+    font-weight: normal;
+    font-size: 16px;
+    font-family: -apple-system, 'San Francisco', 'Helvetica Neue', Helvetica,
+        “Lucida Grande”, Roboto, “Segoe UI”, Arial, Ubuntu, sans-serif;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1.25em;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+h3 {
+    font-weight: 400;
+}
+
+h4 {
+    font-weight: 300;
+    font-family: sans-serif-light;
+}
+
+h5 {
+    font-weight: 200;
+    font-family: sans-serif-light;
+}
+
+h6 {
+    font-weight: 900;
+}
+
+p {
+    line-height: normal;
+}

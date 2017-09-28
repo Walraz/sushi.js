@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const extractSass = new ExtractTextPlugin({
@@ -49,10 +49,10 @@ module.exports = {
                             loader: 'css-loader',
                         },
                         {
+                            loader: 'postcss-loader',
+                        },
+                        {
                             loader: 'sass-loader',
-                            options: {
-                                includePaths: ['./src/core/styles/main.scss'],
-                            },
                         },
                     ],
                     // use style-loader in development

@@ -1,0 +1,73 @@
+$size-small: 24px;
+$size-medium: 32px;
+$size-large: 40px;
+$size-xlarge: 56px;
+$size-xxlarge: 64px;
+
+.su-button {
+    border: 0;
+    background-color: theme(primary);
+    color: rgba(#fff, 0.87);
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-flex;
+    overflow: hidden;
+    user-select: none;
+    vertical-align: top;
+    text-align: center;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out;
+    &:hover {
+        background-color: theme(primaryTint);
+    }
+    &:active {
+        background-color: theme(primaryShade);
+    }
+    &:disabled {
+        color: color(disabled);
+        background-color: background(disabled);
+        cursor: default;
+    }
+    &--small {
+        font-size: 12px;
+        line-height: $size-small;
+        height: $size-small;
+        min-width: $size-small;
+    }
+    &--medium {
+        font-size: 14px;
+        line-height: $size-medium;
+        height: $size-medium;
+        min-width: $size-medium;
+    }
+    &--large {
+        font-size: 16px;
+        line-height: $size-large;
+        height: $size-large;
+        min-width: $size-large;
+    }
+    &--xlarge {
+        font-size: 18px;
+        line-height: $size-xlarge;
+        height: $size-xlarge;
+        min-width: $size-xlarge;
+    }
+    &--xxlarge {
+        font-size: 20px;
+        line-height: $size-xxlarge;
+        height: $size-xxlarge;
+        min-width: $size-xxlarge;
+    }
+    &--rounded {
+        border-radius: 4px;
+    }
+    &--round {
+        border-radius: 50%;
+    }
+}

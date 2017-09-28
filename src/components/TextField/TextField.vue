@@ -1,7 +1,7 @@
 <template>
-  <h1>
+  <p>
     Text field
-  </h1>
+  </p>
 </template>
 
 <script>

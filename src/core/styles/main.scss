@@ -1,2 +1,11 @@
-@import 'theme';
-@import './components/button';
+// Base
+@import './base/functions';
+@import './base/base';
+@import './base/colors';
+@import './base/theme';
+
+// Layout
+@import './layout/padding';
+
+// Components
+@import './components/index';

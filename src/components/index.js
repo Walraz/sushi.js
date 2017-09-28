@@ -1,2 +1,2 @@
-const context = require.context('./', false, /\.vue$/)
+const context = require.context('./', true, /\.vue$/)
 export default context.keys().map(context)

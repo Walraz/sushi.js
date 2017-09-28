@@ -1,0 +1,29 @@
+$padding: 8;
+
+@mixin padding {
+    @for $i from 0 through 4 {
+        .pa-#{$i} {
+            padding: #{$i * $padding}px !important;
+        }
+        .pl-#{$i} {
+            padding-left: #{$i * $padding}px !important;
+        }
+        .pr-#{$i} {
+            padding-right: #{$i * $padding}px !important;
+        }
+        .pt-#{$i} {
+            padding-top: #{$i * $padding}px !important;
+        }
+        .pb-#{$i} {
+            padding-bottom: #{$i * $padding}px !important;
+        }
+        .px-#{$i} {
+            padding: 0 #{$i * $padding}px !important;
+        }
+        .py-#{$i} {
+            padding: #{$i * $padding}px 0 !important;
+        }
+    }
+}
+
+@include padding;
