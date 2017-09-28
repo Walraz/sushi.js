@@ -1,14 +1,13 @@
 {
     "name": "sushi.js",
     "description": "A modular UI library for Vue.js",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "author": "Walraz <hallstrom.rasmus@gmail.com>",
     "private": false,
     "main": "./dist/sushi.js",
     "scripts": {
         "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-        "build":
-            "cross-env NODE_ENV=production webpack --progress --hide-modules"
+        "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
     },
     "dependencies": {
         "vue": "^2.3.3"
