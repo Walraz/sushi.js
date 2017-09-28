@@ -7,12 +7,42 @@ A modular UI library for Vue.js
 
   `npm install sushi.js`
 
+
 ## Usage
 
-    import Vue from 'vue'
-    import Sushi from 'sushi.js'
+In your applications main entry point add:
 
-    Vue.use(Sushi)
+```javascript
+import Vue from 'vue'
+import 'sushi/core/styles/main.scss';
+import Sushi from 'sushi.js'
+
+Vue.use(Sushi)
+```
+
+
+## Theme
+
+  In case of theme changes
+
+  1. remove `import 'sushi/core/styles/main.scss` from your applications main entry point
+  2. in your root .vue instance (App.vue) add
+
+  ```html
+  <style lang="scss">
+     $primary: red;
+     @import 'sushi/core/styles/main.scss';
+  </style>
+  ```
+
+  or
+  1. Create a .scss file with this content (The order of @import is important)
+  ```scss
+  $primary: red; 
+  @import 'sushi/core/styles/main.scss';
+  ```
+  2. import your created .scss file BEFORE `import 'sushi/core/styles/main.scss'`
+
 
 ## Contributing
 

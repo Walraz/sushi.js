@@ -1,0 +1,7 @@
+$primary: #0000ff !default;
+
+$theme: (primary: $primary);
+
+@function theme($key) {
+    @return map-get($theme, $key);
+}
