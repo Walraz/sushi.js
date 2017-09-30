@@ -1,18 +1,18 @@
 .su-icon {
     color: inherit;
-    &--small {
+    &--xsmall {
         font-size: 12px;
     }
+    &--small {
+        font-size: 14px;
+    }
     &--medium {
-        font-size: 16px;
+        font-size: 18px;
     }
     &--large {
         font-size: 24px;
     }
     &--xlarge {
-        font-size: 28px;
-    }
-    &--xxlarge {
         font-size: 32px;
     }
 }

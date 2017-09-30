@@ -1,10 +1,18 @@
-$primary: #0000ff !default;
+$primary: #9a30ad !default;
 
-$primary-tint: tint($primary, 20%);
-$primary-shade: shade($primary, 20%);
+$primary-light: tint($primary, 20%);
+$primary-lighter: tint($primary, 40%);
 
 $theme: (
     primary: $primary,
-    primaryTint: $primary-tint,
-    primaryShade: $primary-shade
+    primaryLight: $primary-light,
+    primaryLighter: $primary-lighter
 );
+
+.primary {
+    background-color: theme(primary) !important;
+}
+
+.primary--text {
+    color: theme(primary) !important;
+}

@@ -8,7 +8,7 @@ const extractSass = new ExtractTextPlugin({
 })
 
 module.exports = {
-    entry: './test/main.js',
+    entry: './example/main.js',
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',

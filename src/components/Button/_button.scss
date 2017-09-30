@@ -1,13 +1,11 @@
-$size-small: 24px;
-$size-medium: 32px;
-$size-large: 40px;
-$size-xlarge: 56px;
-$size-xxlarge: 64px;
+$size-xsmall: 24px;
+$size-small: 32px;
+$size-medium: 40px;
+$size-large: 56px;
+$size-xlarge: 64px;
 
 .su-button {
     border: 0;
-    background-color: theme(primary);
-    color: rgba(#fff, 0.87);
     text-transform: uppercase;
     font-weight: 600;
     display: inline-flex;
@@ -22,52 +20,85 @@ $size-xxlarge: 64px;
     margin: 0;
     position: relative;
     cursor: pointer;
+    letter-spacing: 0.25px;
     transition: background-color 0.2s ease-out;
-    &:hover {
-        background-color: theme(primaryTint);
-    }
-    &:active {
-        background-color: theme(primaryShade);
-    }
     &:disabled {
         color: color(disabled);
         background-color: background(disabled);
         cursor: default;
+        pointer-events: none;
+        box-shadow: none;
+    }
+    &--xsmall {
+        font-size: 10px;
+        height: $size-xsmall;
+        min-width: $size-xsmall;
     }
     &--small {
         font-size: 12px;
-        line-height: $size-small;
         height: $size-small;
         min-width: $size-small;
     }
     &--medium {
         font-size: 14px;
-        line-height: $size-medium;
         height: $size-medium;
         min-width: $size-medium;
+        padding: 0 24px;
     }
     &--large {
         font-size: 16px;
-        line-height: $size-large;
         height: $size-large;
         min-width: $size-large;
+        padding: 0 24px;
     }
     &--xlarge {
         font-size: 18px;
-        line-height: $size-xlarge;
         height: $size-xlarge;
         min-width: $size-xlarge;
-    }
-    &--xxlarge {
-        font-size: 20px;
-        line-height: $size-xxlarge;
-        height: $size-xxlarge;
-        min-width: $size-xxlarge;
+        padding: 0 32px;
     }
     &--rounded {
-        border-radius: 4px;
+        border-radius: 9999px;
     }
-    &--round {
-        border-radius: 50%;
+    &--icon {
+        padding: 0;
+    }
+    &--raised {
+        background-color: #f5f5f5;
+        color: rgba(#000, 0.87);
+        box-shadow: 0 1px 8px rgba($shadow-color, 0.2),
+            0 3px 4px rgba($shadow-color, 0.14),
+            0 3px 3px -2px rgba($shadow-color, 0.12);
+        &:hover:not([disabled]) {
+            background-color: #d5d5d5;
+        }
+    }
+    &--raised.primary {
+        color: rgba(#fff, 0.87);
+        &:hover:not([disabled]) {
+            background-color: theme(primaryLight) !important;
+        }
+    }
+    &--flat {
+        background-color: transparent;
+        color: rgba(#000, 0.87);
+        &:before {
+            transition: 0.2s ease-out;
+            border-radius: inherit;
+            color: inherit;
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            opacity: 0.12;
+            width: 100%;
+        }
+        &:hover:not([disabled]):before {
+            background-color: currentColor;
+        }
+    }
+    &--outlined {
+        border: 2px solid currentColor;
     }
 }

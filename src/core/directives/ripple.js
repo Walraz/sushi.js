@@ -49,7 +49,7 @@ export default {
         }
 
         el.__ripple = ctx
-        el.addEventListener('click', throttle(ctx.click, 200), false)
+        el.addEventListener('mousedown', throttle(ctx.click, 100), false)
     },
     update(el, { value, oldValue }) {
         if (el.__ripple && value !== oldValue) {

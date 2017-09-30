@@ -1,4 +1,4 @@
-const sizes = ['small', 'medium', 'large', 'xlarge', 'xxlarge']
+const sizes = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xlarge']
 
 export const size = (defaultSize = 'medium') => {
     return {
