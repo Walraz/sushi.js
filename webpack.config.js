@@ -9,6 +9,12 @@ const extractSass = new ExtractTextPlugin({
 
 module.exports = {
     entry: './example/main.js',
+    // output: {
+    //     path: path.resolve(__dirname, 'dist'),
+    //     publicPath: '/dist/',
+    //     filename: 'sushi.js',
+    //     libraryTarget: 'umd',
+    // },
     output: {
         path: path.resolve(__dirname, 'docs'),
         filename: 'docs.js',

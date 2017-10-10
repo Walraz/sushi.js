@@ -201,22 +201,49 @@ export default {
   padding: 32px 32px 0px 16px;
   justify-content: center;
   background: theme(gradient);
+  height: 380px;
+  position: relative;
+  flex-wrap: wrap;
+  overflow: hidden;
   img {
-    height: 380px;
+    height: 100%;
+    @media (max-width: 420px) {
+      position: absolute;
+      margin: 0;
+      right: -60%;
+      z-index: 1;
+    }
+    @media (max-width: 320px) {
+      position: absolute;
+      margin: 0;
+      top: 20%;
+      right: -40%;
+      z-index: 1;
+      height: 60%;
+    }
   }
   &__text {
     color: #fff;
+    position: relative;
+    z-index: 2;
     padding-right: 32px;
     h3 {
       font-weight: 700;
       letter-spacing: -1.25px;
       font-size: 38px;
+      @media (max-width: 420px) {
+        max-width: 280px;
+      }
     }
     p {
       width: 300px;
       font-size: 18px;
       letter-spacing: .25px;
       line-height: 24px;
+      @media (max-width: 420px) {
+        font-size: 14px;
+        width: 180px;
+      }
     }
   }
 }

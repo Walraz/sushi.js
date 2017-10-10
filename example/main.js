@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Sushi from '../dist/sushi.js'
+import Sushi from '../src/index.js'
 import App from './App.vue'
 
 console.dir(Sushi)
