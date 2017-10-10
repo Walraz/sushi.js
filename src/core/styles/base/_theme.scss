@@ -1,12 +1,23 @@
-$primary: #9a30ad !default;
+$primary: #312cae !default;
+$accent: #4d2de7 !default;
 
 $primary-light: tint($primary, 20%);
 $primary-lighter: tint($primary, 40%);
 
+$primary-dark: shade($primary, 20%);
+$primary-darker: shade($primary, 40%);
+
+$alert: #ff224a !default;
+
 $theme: (
     primary: $primary,
+    accent: $accent,
     primaryLight: $primary-light,
-    primaryLighter: $primary-lighter
+    primaryLighter: $primary-lighter,
+    primaryDark: $primary-dark,
+    primaryDarker: $primary-darker,
+    gradient: linear-gradient(to right, $primary , $accent),
+    alert: $alert,
 );
 
 .primary {

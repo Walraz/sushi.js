@@ -10,9 +10,8 @@ const extractSass = new ExtractTextPlugin({
 module.exports = {
     entry: './example/main.js',
     output: {
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
-        filename: 'sushi.js',
+        path: path.resolve(__dirname, 'docs'),
+        filename: 'docs.js',
         libraryTarget: 'umd',
     },
     module: {
@@ -27,10 +26,24 @@ module.exports = {
                         // other preprocessors should work out of the box, no loader config like this necessary.
                         scss: 'vue-style-loader!css-loader!sass-loader',
                         sass:
-                            'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+                        'vue-style-loader!css-loader!sass-loader?indentedSyntax',
                     },
                     // other vue-loader options go here
                 },
+            },
+            {
+                test: /\.md$/,
+                use: [
+                    {
+                        loader: "html-loader"
+                    },
+                    {
+                        loader: "markdown-loader",
+                        options: {
+                            /* your options here */
+                        }
+                    }
+                ]
             },
             {
                 test: /\.js$/,
@@ -85,9 +98,14 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    module.exports.entry = './src/index.js'
     module.exports.devtool = '#source-map'
-    // http://vue-loader.vuejs.org/en/workflow/production.html
+    // module.exports.entry = './src/index.js'
+    // module.exports.output = {
+    //     path: path.resolve(__dirname, 'dist'),
+    //     publicPath: '/dist/',
+    //     filename: 'sushi.js',
+    //     libraryTarget: 'umd',
+    // }
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {

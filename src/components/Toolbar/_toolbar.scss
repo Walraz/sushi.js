@@ -1,0 +1,60 @@
+.su-toolbar__wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex: 1;
+  &--small {
+    height: 40px;
+  }
+  &--medium {
+    height: 56px;
+  }
+  &--large {
+    height: 64px;
+  }
+}
+.su-toolbar {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  background-color: #fff;
+  justify-content: space-between;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1098;
+  &--border {
+    border-bottom: 1px solid rgba(#000, .11);
+  }
+  &--fixed {
+    position: fixed;
+    z-index: 1099;
+  }
+  &--primary {
+    background: theme(primary);
+  }
+  &--gradient {
+    background: theme(gradient);
+  }
+  &--small {
+    height: 40px;
+  }
+  &--medium {
+    height: 56px;
+  }
+  &--large {
+    height: 64px;
+  }
+  &__left {
+    padding-left: 8px;
+    justify-content: flex-start;
+  }
+  &__right {
+    justify-content: flex-end;
+  }
+  &__left, &__right {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+}

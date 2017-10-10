@@ -1,3 +1,9 @@
-$colors: (disabled: rgba(#000, 0.54));
+$colors: (
+  disabledDark: rgba(#000, 0.30),
+  disabledLight: rgba(#fff, 0.30)
+  );
 
-$backgrounds: (disabled: rgba(#000, 0.12));
+$backgrounds: (
+  disabledDark: rgba(#000, 0.08),
+  disabledLight: rgba(#fff, 0.08)
+);

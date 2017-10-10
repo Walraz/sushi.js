@@ -8,13 +8,14 @@
     "scripts": {
         "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
         "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-        "prepublish": "yarn build"
+        "prepublish": "yarn build",
+        "docs": "vuedoc.md src/components/**/*.vue --output example/docs"
     },
     "dependencies": {
-        "normalize.css": "^7.0.0",
         "vue": "^2.3.3"
     },
     "devDependencies": {
+        "@vuedoc/md": "^0.7.1",
         "autoprefixer": "^7.1.4",
         "babel-core": "^6.0.0",
         "babel-loader": "^7.1.2",
@@ -23,6 +24,8 @@
         "css-loader": "^0.25.0",
         "extract-text-webpack-plugin": "^3.0.0",
         "file-loader": "^0.9.0",
+        "html-loader": "^0.5.1",
+        "markdown-loader": "^2.0.1",
         "node-sass": "^4.5.3",
         "postcss-loader": "^2.0.6",
         "pug": "^2.0.0-rc.4",

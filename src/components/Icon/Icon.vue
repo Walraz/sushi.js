@@ -18,7 +18,12 @@ export default {
   },
 
   props: {
-    size: size('large'),
+    name: String,
+    size: {
+      type: String,
+      default: 'large',
+      validator: size(),
+    },
   }
 }
 </script>

@@ -1,0 +1,16 @@
+// Scale in
+.su-anim--scaleIn-enter-active, .su-anim--scaleIn-leave-active {
+  transition: transform .4s
+}
+.su-anim--scaleIn-enter, .su-anim--scaleIn-leave-to {
+  transform: scale(0)
+}
+
+// Fade Down
+.su-anim--fadeDown-enter-active, .su-anim--fadeDown-leave-active {
+  transition: transform .4s, opacity .4s
+}
+.su-anim--fadeDown-enter, .su-anim--fadeDown-leave-to {
+  transform: translateY(8px);
+  opacity: 0;
+}

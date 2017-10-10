@@ -1,0 +1,29 @@
+$margin: 8;
+
+@mixin margin {
+    @for $i from 0 through 4 {
+        .ma-#{$i} {
+            margin: #{$i * $margin}px !important;
+        }
+        .ml-#{$i} {
+            margin-left: #{$i * $margin}px !important;
+        }
+        .mr-#{$i} {
+            margin-right: #{$i * $margin}px !important;
+        }
+        .mt-#{$i} {
+            margin-top: #{$i * $margin}px !important;
+        }
+        .mb-#{$i} {
+            margin-bottom: #{$i * $margin}px !important;
+        }
+        .mx-#{$i} {
+            margin: 0 #{$i * $margin}px !important;
+        }
+        .my-#{$i} {
+            margin: #{$i * $margin}px 0 !important;
+        }
+    }
+}
+
+@include margin;
