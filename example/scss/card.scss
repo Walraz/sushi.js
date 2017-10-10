@@ -1,0 +1,30 @@
+.card {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  &__title {
+    display: flex;
+    height: 48px;
+    align-items: center;
+    color: #fff;
+    background: theme(primary);
+    padding: 0 16px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__content {
+    background: #fff;
+    &--dark {
+      background: #333;
+    }
+    p {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 16px;
+    }
+  }
+}

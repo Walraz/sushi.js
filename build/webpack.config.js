@@ -9,17 +9,13 @@ const extractSass = new ExtractTextPlugin({
 
 module.exports = {
     entry: './example/main.js',
-    // output: {
-    //     path: path.resolve(__dirname, 'dist'),
-    //     publicPath: '/dist/',
-    //     filename: 'sushi.js',
-    //     libraryTarget: 'umd',
-    // },
     output: {
-        path: path.resolve(__dirname, 'docs'),
-        filename: 'docs.js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/dist/',
+        filename: 'sushi.js',
         libraryTarget: 'umd',
     },
+
     module: {
         rules: [
             {
@@ -105,13 +101,6 @@ module.exports = {
 
 if (process.env.NODE_ENV === 'production') {
     module.exports.devtool = '#source-map'
-    // module.exports.entry = './src/index.js'
-    // module.exports.output = {
-    //     path: path.resolve(__dirname, 'dist'),
-    //     publicPath: '/dist/',
-    //     filename: 'sushi.js',
-    //     libraryTarget: 'umd',
-    // }
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {

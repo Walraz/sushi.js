@@ -66,13 +66,6 @@ $size-xlarge: 64px;
         }
     }
     &--contrast.su-button--raised {
-        background-color: #333;
-        color: #fff;
-        box-shadow: 0 3px 4px -2px rgba(#000, .3);
-        &:hover:not([disabled]) {
-            background-color: lighten(#333, 1%);
-            box-shadow: 0 6px 8px -2px rgba(#000, .3);
-        }
         &:disabled {
             background-color: background(disabledLight);
             color: color(disabledLight);
@@ -147,6 +140,14 @@ $size-xlarge: 64px;
         }
     }
 
+    &--contrast.su-button--primary.su-button--flat {
+        color: theme(primaryLighter);
+        &:disabled {
+            background-color: transparent;
+            color: color(disabledLight);
+        }
+    }
+
     &--outlined {
         border: 2px solid currentColor;
         background-color: transparent;
@@ -172,6 +173,16 @@ $size-xlarge: 64px;
         &:disabled {
             border: 2px solid color(disabledDark);
             color: color(disabledDark);
+        }
+    }
+
+    &--primary.su-button--primary.su-button--outlined {
+        color: theme(primaryLighter);
+        background-color: transparent;
+        &:hover {
+            border: 2px solid theme(primaryLighter);
+            background-color: theme(primaryLighter);
+            color: #fff;
         }
     }
 
@@ -251,17 +262,13 @@ $size-xlarge: 64px;
         opacity: 1;
         transform: translateY(0);
         transition: transform .245s ease-in-out, opacity .245s ease-in-out;
-        &--loading {
-            opacity: 0;
-            transform: translateY(8px);
-            pointer-events: none;
-        }
     }
 
     &__label {
         padding: 0 8px;
         margin: 0;
         display: inline-flex;
+        align-items: center;
     }
 
     &__icon-left {
@@ -272,5 +279,14 @@ $size-xlarge: 64px;
     &__icon-right {
         padding-right: 4px;
         display: inline-flex;
+    }
+
+    &--loading {
+        pointer-events: none;
+        .su-button__content {
+            opacity: 0;
+            transform: translateY(8px);
+            pointer-events: none;
+        }
     }
 }

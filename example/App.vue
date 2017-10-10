@@ -1,101 +1,151 @@
-<template>
-  <div id="app">
-    <v-toolbar fixed size="large" gradient>
-      <v-button icon contrast slot="left">
-        <v-icon>menu</v-icon>
-      </v-button>
-      <span class="ml-2" slot="left">
-        <img height="24" src="./sushi.png" alt="Sushi.js">
-      </span>
-      <v-button class="mr-1" rounded contrast icon size="medium" slot="right">
-        <v-icon>account_circle</v-icon>
-      </v-button>
-      <v-button class="mr-2" rounded contrast icon size="medium" slot="right">
-        <v-icon>settings</v-icon>
-      </v-button>
-    </v-toolbar>
+<template lang="pug">
+  div#app
+    v-toolbar(fixed size="large" gradient)
+      v-button(icon contrast slot="left")
+        v-icon menu
+      span.ml-2(slot="left")
+        img(height="24" src="./sushi.png" alt="Sushi.js")
+      v-button.mr-1(rounded contrast icon size="medium" slot="right")
+        v-icon account_circle
+      v-button.mr-2(rounded contrast icon size="medium" slot="right")
+        v-icon settings
 
-    <div class="intro">
-      <div class="intro__text">
-        <h3>Create your combo</h3>
-        <p>Providing flexible UI components that scales 🍣🍣🍣</p>
-      </div>
-      <img src="./sushi_intro.svg" alt="Sushi intro">
-    </div>
+    div.intro
+      div.intro__text
+        h3 Create your combo
+        p Providing flexible UI components that scales 🍣🍣🍣
+      img(src="./sushi_intro.svg" alt="Sushi intro")
 
-    <v-toolbar border size="small">
-      <v-button squared size="medium" icon slot="left">
-        <v-icon size="medium">bookmark</v-icon>
-      </v-button>
-      <v-button squared size="medium" slot="left">
-        <v-icon size="medium" slot="icon-left">invert_colors</v-icon>Invert
-      </v-button>
-      <v-button squared size="medium" slot="left">
-        <v-icon slot="icon-left" size="medium">content_paste</v-icon>Paste
-      </v-button>
-    </v-toolbar>
+    v-toolbar(border size="small" sticky)
+      v-button(squared size="medium" slot="left" @click="toAnchor('su-description')")
+        v-icon(slot="icon-left" size="medium") description
+        | Description
+      v-button(squared size="medium" slot="left" @click="toAnchor('su-examples')")
+        v-icon(size="medium" slot="icon-left") slideshow
+        | Examples
+    main#content
+      div#su-description.component-details(v-html="buttonMD")
 
-    <div class="component-details" v-html="buttonMD"></div>
+      div#su-examples
+        div.card.elevation-1
+          div.card__title Flat
+          div.card__content
+            p
+              v-button Normal
+              v-button(rounded) Rounded
+              v-button(squared) Squared
+              v-button(disabled) Disabled
+            p
+              v-button(primary) Primary
+              v-button(rounded primary) Rounded
+              v-button(squared primary) Squared
+              v-button(disabled primary) Disabled
+          div.card__content.card__content--dark
+            p
+              v-button(contrast) Normal
+              v-button(rounded contrast) Rounded
+              v-button(squared contrast) Squared
+              v-button(disabled contrast) Disabled
+            p
+              v-button(primary contrast) Primary
+              v-button(rounded primary contrast) Rounded
+              v-button(squared primary contrast) Squared
+              v-button(disabled primary contrast) Disabled
 
-    <p class="elevation-2">
-      <v-button>Normal</v-button>
-      <v-button rounded>Normal</v-button>
-      <v-button squared>Normal</v-button>
-      <v-button disabled>Normal</v-button>
-    </p>
-    <p>
-      <v-button primary>Primary</v-button>
-      <v-button primary rounded>Primary</v-button>
-      <v-button primary squared>Primary</v-button>
-      <v-button primary disabled>Primary</v-button>
-    </p>
-    <p>
-      <v-button :loading="loading" theme="alert">Primary</v-button>
-      <v-button @click="toggleLoading" theme="raised" rounded>Primary</v-button>
-      <v-button theme="raised" squared>Primary</v-button>
-      <v-button theme="raised" disabled>Primary</v-button>
-    </p>
-    <p>
-      <v-button theme="raised" primary>Primary</v-button>
-      <v-button theme="raised" primary rounded>Primary</v-button>
-      <v-button theme="raised" primary squared>Primary</v-button>
-      <v-button theme="raised" primary disabled>Primary</v-button>
-    </p>
-    <p>
-      <v-button theme="outlined">Primary</v-button>
-      <v-button theme="outlined" rounded>Primary</v-button>
-      <v-button theme="outlined" squared>Primary</v-button>
-      <v-button theme="outlined" disabled>Primary</v-button>
-    </p>
-    <p>
-      <v-button theme="outlined" primary>
-        Primary
-      </v-button>
-      <v-button theme="outlined" primary rounded>
-        Primary
-      </v-button>
-      <v-button theme="outlined" primary squared>Primary</v-button>
-      <v-button theme="outlined" primary disabled>Primary</v-button>
-    </p>
-    <p style="background: #333; padding: 32px;margin: 0">
-      <v-button contrast theme="outlined">Primary</v-button>
-      <v-button contrast theme="outlined" rounded>Primary</v-button>
-      <v-button contrast theme="outlined" squared>Primary</v-button>
-      <v-button contrast theme="outlined" disabled>Primary</v-button>
-    </p>
-    <p style="background: #333; padding: 32px; margin: 0">
-      <v-button contrast theme="flat">Primary</v-button>
-      <v-button contrast theme="flat" rounded>Primary</v-button>
-      <v-button contrast theme="flat" squared>Primary</v-button>
-      <v-button contrast theme="flat" disabled>Primary</v-button>
-    </p>
-    <p style="background: #333; padding: 32px; margin: 0">
-      <v-button contrast primary theme="alert">Primary</v-button>
-      <v-button contrast primary theme="raised" rounded>Primary</v-button>
-      <v-button contrast primary theme="raised" squared>Primary</v-button>
-      <v-button contrast primary theme="raised" disabled>Primary</v-button>
-    </p>
-  </div>
+        div.card.elevation-1
+          div.card__title Raised
+          div.card__content
+            p
+              v-button(theme="raised") Normal
+              v-button(rounded theme="raised") Rounded
+              v-button(squared theme="raised") Squared
+              v-button(disabled theme="raised") Disabled
+            p
+              v-button(primary theme="raised") Primary
+              v-button(rounded primary theme="raised") Rounded
+              v-button(squared primary theme="raised") Squared
+              v-button(disabled primary theme="raised") Disabled
+          div.card__content.card__content--dark
+            p
+              v-button(primary theme="raised" contrast) Primary
+              v-button(rounded primary theme="raised" contrast) Rounded
+              v-button(squared primary theme="raised" contrast) Squared
+              v-button(disabled primary theme="raised" contrast) Disabled
+
+        div.card.elevation-1
+          div.card__title Outlined
+          div.card__content
+            p
+              v-button(theme="outlined") Normal
+              v-button(rounded theme="outlined") Rounded
+              v-button(squared theme="outlined") Squared
+              v-button(disabled theme="outlined") Disabled
+            p
+              v-button(primary theme="outlined") Primary
+              v-button(rounded primary theme="outlined") Rounded
+              v-button(squared primary theme="outlined") Squared
+              v-button(disabled primary theme="outlined") Disabled
+          div.card__content.card__content--dark
+            p
+              v-button(theme="outlined" contrast) Normal
+              v-button(rounded theme="outlined" contrast) Rounded
+              v-button(squared theme="outlined" contrast) Squared
+              v-button(disabled theme="outlined" contrast) Disabled
+            p
+              v-button(primary theme="outlined" contrast) Primary
+              v-button(rounded primary theme="outlined" contrast) Rounded
+              v-button(squared primary theme="outlined" contrast) Squared
+              v-button(disabled primary theme="outlined" contrast) Disabled
+              
+        div.card.elevation-1
+          div.card__title Icon/Alert/Loading
+          div.card__content
+            p
+              v-button(theme="raised" primary :loading="loading")
+                v-icon(slot="icon-left" size="medium") bookmark
+                | Icon left
+              v-button(theme="alert" :loading="loading")
+                v-icon(slot="icon-right" size="small") warning
+                | Icon Right
+              v-button(theme="outlined" :loading="loading")
+                  v-icon star
+              v-button(theme="raised" primary icon :loading="loading")
+                  v-icon star
+              v-button(theme="alert" icon rounded :loading="loading")
+                  v-icon whatshot
+            p
+              v-button(theme="flat" primary :loading="loading")
+                v-icon(slot="icon-left" size="medium") access_time
+                | Loading
+              v-button(theme="raised" rounded @click="toggleLoading")
+                v-icon(slot="icon-left" size="medium") arrow_back
+                | Toggle Loading
+                v-icon(slot="icon-right" size="medium") arrow_forward
+              v-button(theme="alert" :loading="loading")
+                v-icon(slot="icon-left" size="medium") access_time
+                | Loading
+              v-button(icon primary rounded theme="outlined" loading)
+
+        div.card.elevation-1
+          div.card__title Sizing
+          div.card__content
+            p
+              v-button(theme="raised" primary size="xsmall") xsmall
+              v-button(rounded theme="raised" primary size="small") small
+              v-button(squared theme="raised" primary size="medium") medium
+              v-button(theme="raised" primary size="large") large
+              v-button(theme="raised" primary size="xlarge") xlarge
+            p
+              v-button(theme="raised" rounded primary size="xlarge" icon)
+                v-icon bookmark
+              v-button(theme="raised" rounded primary size="large" icon)
+                v-icon(size="medium") bookmark
+              v-button(theme="raised" rounded primary size="medium" icon)
+                v-icon(size="small") bookmark
+              v-button(theme="alert" rounded primary size="small" icon)
+                v-icon(size="small") bookmark
+              v-button(theme="outlined" rounded primary size="xsmall" icon)
+                v-icon(size="xsmall") bookmark
 </template>
 
 <script>
@@ -111,6 +161,10 @@ export default {
   },
 
   methods: {
+    toAnchor(id) {
+      const anchorElTop = this.$el.querySelector(`#${id}`).offsetTop
+      window.scrollTo(0, anchorElTop - 136)
+    },
     toggleLoading() {
       this.loading = !this.loading
     }
@@ -120,131 +174,25 @@ export default {
 
 <style lang="scss">
 @import '../src/core/styles/main';
+@import './scss/intro';
+@import './scss/card';
+@import './scss/component-details';
 
 #app {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
-.component-details {
-  padding: 16px;
-  color: rgba(#333, 1);
-  >p {
-    line-height: 32px !important;
-  }
-  h1 {
-    text-transform: capitalize;
-  }
-
-  h2 {
-    padding-top: 32px;
-  }
-
-  ul:first-of-type {
-    code:nth-child(n + 2) {
-      display: block;
-      padding: 16px 0 8px 0;
-      color: theme(primary);
-    }
-  }
-
-  ul:last-of-type {
-    font-size: 14px;
-    code {
-      padding: 16px 0 8px 0;
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    em {
-      color: rgba(#333, .5);
-    }
-    strong em {
-      color: rgba(#333, 1);
-      font-size: 14px;
-    }
-    code:first-child {
-      min-width: 200px;
-      box-shadow: 0 1px 3px 1px rgba(#000, .11);
-      padding: 4px 8px;
-      font-weight: 700;
-      color: #333;
-      margin: 0 4px 0 0;
-    }
-    li {
-      padding: 32px 0;
-      p {
-        font-size: 14px;
-      }
-    }
-  }
-
-  p {
-    line-height: 18px;
-    max-width: 420px;
-  }
-
-  code:only-child {
-    box-shadow: 0 1px 3px 1px rgba(#000, .11);
-    padding: 4px 8px;
-    font-weight: 700;
-    color: theme(primaryLighter);
-    margin: 0 4px;
-  }
-}
-
-
-.intro {
+#content {
+  margin: 0 auto;
+  max-width: 960px;
+  width: 100%;
+  padding: 32px;
   display: flex;
-  padding: 32px 32px 0px 16px;
-  justify-content: center;
-  background: theme(gradient);
-  height: 380px;
-  position: relative;
-  flex-wrap: wrap;
-  overflow: hidden;
-  img {
-    height: 100%;
-    @media (max-width: 420px) {
-      position: absolute;
-      margin: 0;
-      right: -60%;
-      z-index: 1;
-    }
-    @media (max-width: 320px) {
-      position: absolute;
-      margin: 0;
-      top: 20%;
-      right: -40%;
-      z-index: 1;
-      height: 60%;
-    }
-  }
-  &__text {
-    color: #fff;
-    position: relative;
-    z-index: 2;
-    padding-right: 32px;
-    h3 {
-      font-weight: 700;
-      letter-spacing: -1.25px;
-      font-size: 38px;
-      @media (max-width: 420px) {
-        max-width: 280px;
-      }
-    }
-    p {
-      width: 300px;
-      font-size: 18px;
-      letter-spacing: .25px;
-      line-height: 24px;
-      @media (max-width: 420px) {
-        font-size: 14px;
-        width: 180px;
-      }
-    }
+  flex-direction: column;
+  button {
+    @extend .my-1;
   }
 }
 </style>
+

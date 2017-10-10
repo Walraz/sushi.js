@@ -1,5 +1,6 @@
 # toolbar 
 ## props 
+- `sticky` ***Boolean*** (*optional*) 
 - `border` ***Boolean*** (*optional*) 
 - `fixed` ***Boolean*** (*optional*) 
 - `primary` ***Boolean*** (*optional*) 

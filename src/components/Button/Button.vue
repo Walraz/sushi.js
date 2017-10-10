@@ -3,7 +3,7 @@
     transition(name="su-anim--scaleIn")
       spinner(:size="size" v-if="loading")
     transition(name="su-anim--fadeDown")
-      div(:class="['su-button__content', loading && 'su-button__content--loading']")
+      div.su-button__content
         span.su-button__icon-left(:class="{'pl-0' : !isIconLeft}")
           slot(name="icon-left")
         span.su-button__label
@@ -57,8 +57,13 @@ export default {
         this.rounded && 'su-button--rounded',
         this.squared && 'su-button--squared',
         this.block && 'su-button--block',
+        this.loading && 'su-button--loading',
+        !this.isLabel && 'px-0',
       ]
-    }
+    },
+    isLabel() {
+      return this.value.legnth || this.$slots.default
+    },
   },
 
   props: {
@@ -152,7 +157,7 @@ export default {
      */
     value: {
       type: String,
-      default: 'Button',
+      default: '',
     },
   }
 }

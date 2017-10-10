@@ -6,10 +6,11 @@
     "private": false,
     "main": "./dist/sushi.js",
     "scripts": {
-        "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-        "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js --open --hot",
+        "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.dist.config.js --progress --hide-modules",
+        "docs": "npm run md && cross-env NODE_ENV=production webpack --config ./build/webpack.docs.config.js --progress --hide-modules",
         "prepublish": "yarn build",
-        "docs": "vuedoc.md src/components/**/*.vue --output example/docs"
+        "md": "vuedoc.md src/components/**/*.vue --output example/docs"
     },
     "dependencies": {
         "vue": "^2.3.3"

@@ -35,7 +35,7 @@ Set the type of the button ['submit', 'button', 'reset']
 - `theme` ***String*** (*optional*) `default: 'flat'` 
 Set the theme of the button ['raised', 'flat', 'outlined', 'alert'] 
 
-- `v-model` ***String*** (*optional*) `default: 'Button'` 
+- `v-model` ***String*** (*optional*) `default: ''` 
 Set the label (default slot will overwrite this string) 
 
 
