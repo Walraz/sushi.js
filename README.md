@@ -2,13 +2,15 @@
 
 A modular UI library for Vue.js
 
+> Note: This is still an work in progress!
+
 ## Installation
 
   `npm install sushi.js`
 
 ## Usage
 
-For Examples and documention go to: [walraz.github.io/sushi.js](http://walraz.github.io/sushi.js/)
+For examples and documention go to: [walraz.github.io/sushi.js](http://walraz.github.io/sushi.js/)
 
 ## Install
 
@@ -47,4 +49,4 @@ Vue.use(Sushi)
 
 ## Contributing
 
-    ...
+    🍣🍣🍣
