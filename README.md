@@ -1,7 +1,7 @@
 sushi.js
 =========
 
-![Sushi.js](/docs/sushi_intro.svg?raw=true "Sushi.js")
+![Sushi.js](/sushi_git.png?raw=true "Sushi.js")
 
 A modular UI library for Vue.js
 
