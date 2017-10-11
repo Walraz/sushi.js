@@ -1,7 +1,7 @@
 {
     "name": "sushi.js",
     "description": "A modular UI library for Vue.js",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "author": "Walraz <hallstrom.rasmus@gmail.com>",
     "private": false,
     "homepage": "http://walraz.github.io/sushi.js/",
