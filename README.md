@@ -1,4 +1,4 @@
-![Sushi.js](/sushi_logo_git.png =100)
+<img alt="Sushi.js" src="/sushi_logo_git.png" height="48">
 =========
 
 ![Sushi.js](/sushi_git.png?raw=true "Sushi.js")
