@@ -42,7 +42,7 @@ You have 2 options for import location, either your main `App.vue` or `app.js`
 import '/path/to/your/style.scss'
 ```
 
-````html
+```html
 <script lang="scss">
   @import '/path/to/your.scss';
 </script>

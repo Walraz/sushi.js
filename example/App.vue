@@ -5,10 +5,8 @@
         v-icon menu
       span.ml-2(slot="left")
         img(height="24" src="./assets/img/sushi_white_logo.png" alt="Sushi.js")
-      v-button.mr-1(rounded contrast icon size="medium" slot="right")
-        v-icon account_circle
-      v-button.mr-2(rounded contrast icon size="medium" slot="right")
-        v-icon settings
+      v-button.mr-1(rounded contrast icon size="medium" slot="right" @click="toGithub")
+        img(src="./assets/img/github_logo.png" height="24")
 
     div.intro
       div.intro__text
@@ -161,6 +159,9 @@ export default {
   },
 
   methods: {
+    toGithub() {
+      location.href = 'https://github.com/Walraz/sushi.js'
+    },
     toAnchor(id) {
       const anchorElTop = this.$el.querySelector(`#${id}`).offsetTop
       window.scrollTo(0, anchorElTop - 136)
