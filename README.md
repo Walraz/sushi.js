@@ -1,4 +1,4 @@
-<img alt="Sushi.js" src="/sushi_logo_git.png" height="48"> <img alt="Sushi.js" src="/sushi_git.png" height="48">
+<img alt="Sushi.js" src="/sushi_logo_git.png" height="48"> <img alt="Sushi.js" src="/sushi_git.png" height="48"><img alt="Sushi.js" src="/sushi_git.png" height="48"><img alt="Sushi.js" src="/sushi_git.png" height="48">
 
 A modular UI library for Vue.js
 
