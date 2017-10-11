@@ -1,7 +1,7 @@
 {
     "name": "sushi.js",
     "description": "A modular UI library for Vue.js",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "author": "Walraz <hallstrom.rasmus@gmail.com>",
     "private": false,
     "main": "./dist/sushi.js",
