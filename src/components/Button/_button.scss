@@ -176,7 +176,7 @@ $size-xlarge: 64px;
         }
     }
 
-    &--primary.su-button--primary.su-button--outlined {
+    &--primary.su-button--contrast.su-button--outlined {
         color: theme(primaryLighter);
         background-color: transparent;
         &:hover {

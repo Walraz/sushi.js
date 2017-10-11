@@ -3,10 +3,30 @@
   position: relative;
   display: flex;
   flex: 1;
+  background: #fff;
+  &--primary {
+    background: theme(primary);
+    > .su-toolbar {
+      @extend .su-toolbar__wrapper--primary;
+    }
+  }
+  &--gradient {
+    background: theme(gradient);
+    > .su-toolbar {
+      @extend .su-toolbar__wrapper--gradient;
+    }
+  }
   &--sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 64px;
+    z-index: 1099;
+  }
+  &--border {
+    border-bottom: 1px solid rgba(#000, .11);
+    > .su-toolbar {
+      @extend .su-toolbar__wrapper--border;
+    }
   }
   &--small {
     height: 40px;
@@ -22,24 +42,15 @@
   width: 100%;
   flex: 1;
   display: flex;
-  background-color: #fff;
+  background: #fff;
   justify-content: space-between;
   position: relative;
   top: 0;
   left: 0;
   z-index: 1098;
-  &--border {
-    border-bottom: 1px solid rgba(#000, .11);
-  }
   &--fixed {
     position: fixed;
     z-index: 1099;
-  }
-  &--primary {
-    background: theme(primary);
-  }
-  &--gradient {
-    background: theme(gradient);
   }
   &--small {
     height: 40px;

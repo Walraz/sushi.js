@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="['su-toolbar__wrapper', `su-toolbar__wrapper--${size}`, sticky && `su-toolbar__wrapper--sticky`]")
+  div(:class="wrapperClassList")
     div(:class="classList")
       div.su-toolbar__left
         slot(name="left")
@@ -12,15 +12,21 @@ export default {
   name: 'toolbar',
 
   computed: {
+    wrapperClassList() {
+      return [
+        'su-toolbar__wrapper',
+        `su-toolbar__wrapper--${this.size}`,
+        this.primary && 'su-toolbar__wrapper--primary',
+        this.gradient && 'su-toolbar__wrapper--gradient',
+        this.sticky && 'su-toolbar__wrapper--sticky',
+        this.border && 'su-toolbar__wrapper--border',
+      ]
+    },
     classList() {
       return [
         'su-toolbar',
         `su-toolbar--${this.size}`,
-        this.primary && 'su-toolbar--primary',
-        this.gradient && 'su-toolbar--gradient',
         this.fixed && 'su-toolbar--fixed',
-        this.sticky && 'su-toolbar--sticky',
-        this.border && 'su-toolbar--border',
       ]
     }
   },
