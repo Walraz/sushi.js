@@ -1,4 +1,4 @@
-sushi.js
+![Sushi.js](/sushi_logo_git.png?raw=true "Sushi.js")
 =========
 
 ![Sushi.js](/sushi_git.png?raw=true "Sushi.js")
