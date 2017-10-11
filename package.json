@@ -4,13 +4,36 @@
     "version": "0.1.7",
     "author": "Walraz <hallstrom.rasmus@gmail.com>",
     "private": false,
+    "homepage": "http://walraz.github.io/sushi.js/",
+    "keywords": [
+        "ui",
+        "ui library",
+        "ui framework",
+        "vue",
+        "vue 2",
+        "vue2",
+        "vuejs",
+        "material design",
+        "material",
+        "components"
+    ],
+    "engines": {
+        "node": ">=8.4.0"
+    },
     "main": "./dist/sushi.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Walraz/sushi.js"
+    },
+    "files": [
+        "dist",
+        "src"
+    ],
     "scripts": {
         "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js --open --hot",
-        "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.dist.config.js --progress --hide-modules",
-        "docs": "npm run md && cross-env NODE_ENV=production webpack --config ./build/webpack.docs.config.js --progress --hide-modules",
-        "prepublish": "yarn build",
-        "md": "vuedoc.md src/components/**/*.vue --output example/docs"
+        "build": "rm -rf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.dist.config.js --progress --hide-modules",
+        "docs": "rm -rf docs && npm run md && cross-env NODE_ENV=production webpack --config ./build/webpack.docs.config.js --progress --hide-modules",
+        "md": "vuedoc.md src/components/**/*.vue --output example/assets/md"
     },
     "dependencies": {
         "vue": "^2.3.3"
@@ -26,6 +49,8 @@
         "extract-text-webpack-plugin": "^3.0.0",
         "file-loader": "^0.9.0",
         "html-loader": "^0.5.1",
+        "html-webpack-exclude-assets-plugin": "^0.0.5",
+        "html-webpack-plugin": "^2.30.1",
         "markdown-loader": "^2.0.1",
         "node-sass": "^4.5.3",
         "postcss-loader": "^2.0.6",

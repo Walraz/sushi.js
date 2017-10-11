@@ -4,7 +4,7 @@
       v-button(icon contrast slot="left")
         v-icon menu
       span.ml-2(slot="left")
-        img(height="24" src="./sushi.png" alt="Sushi.js")
+        img(height="24" src="./assets/img/sushi_white_logo.png" alt="Sushi.js")
       v-button.mr-1(rounded contrast icon size="medium" slot="right")
         v-icon account_circle
       v-button.mr-2(rounded contrast icon size="medium" slot="right")
@@ -14,7 +14,7 @@
       div.intro__text
         h3 Create your combo
         p Providing flexible UI components that scales 🍣🍣🍣
-      img(src="./sushi_intro.svg" alt="Sushi intro")
+      img(src="./assets/img/sushi_intro.svg" alt="Sushi intro")
 
     v-toolbar(border size="small" sticky)
       v-button(squared size="medium" slot="left" @click="toAnchor('su-description')")
@@ -149,7 +149,7 @@
 </template>
 
 <script>
-import ButtonMD from './docs/Button.md'
+import ButtonMD from './assets/md/Button.md'
 export default {
   name: 'app',
 
@@ -174,9 +174,9 @@ export default {
 
 <style lang="scss">
 @import '../src/core/styles/main';
-@import './scss/intro';
-@import './scss/card';
-@import './scss/component-details';
+@import './assets/scss/intro';
+@import './assets/scss/card';
+@import './assets/scss/component-details';
 
 #app {
   display: flex;

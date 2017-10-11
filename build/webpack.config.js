@@ -11,7 +11,7 @@ module.exports = {
     entry: './example/main.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/dist/',
+        publicPath: '/',
         filename: 'sushi.js',
         libraryTarget: 'umd',
     },
@@ -100,7 +100,7 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
+    // module.exports.devtool = '#source-map'
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {
@@ -108,7 +108,7 @@ if (process.env.NODE_ENV === 'production') {
             },
         }),
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
+            sourceMap: false,
             compress: {
                 warnings: false,
             },
