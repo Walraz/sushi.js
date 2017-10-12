@@ -3,7 +3,7 @@
   padding: 32px 32px 0px 16px;
   justify-content: center;
   background: theme(gradient);
-  height: 380px;
+  height: calc(100vh - 64px);
   position: relative;
   flex-wrap: wrap;
   overflow: hidden;
@@ -12,14 +12,14 @@
     @media (max-width: 420px) {
       position: absolute;
       margin: 0;
-      right: -60%;
+      right: -100%;
       z-index: 1;
     }
     @media (max-width: 320px) {
       position: absolute;
       margin: 0;
       top: 20%;
-      right: -40%;
+      right: -50%;
       z-index: 1;
       height: 60%;
     }

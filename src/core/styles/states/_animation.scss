@@ -14,3 +14,12 @@
   transform: translateY(8px);
   opacity: 0;
 }
+
+// Fade Right
+.su-anim--fadeRight-enter-active, .su-anim--fadeRight-leave-active {
+  transition: transform .25s, opacity .4s
+}
+.su-anim--fadeRight-enter, .su-anim--fadeRight-leave-to {
+  transform: translateX(16px);
+  opacity: 0;
+}

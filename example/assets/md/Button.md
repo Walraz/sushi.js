@@ -35,6 +35,12 @@ Set the type of the button ['submit', 'button', 'reset']
 - `theme` ***String*** (*optional*) `default: 'flat'` 
 Set the theme of the button ['raised', 'flat', 'outlined', 'alert'] 
 
+- `align` ***String*** (*optional*) `default: 'center'` 
+Align button content left, right or center 
+
+- `to` ***Object*** (*optional*) 
+Uses Vue-router push method to programmatically set destiation (Disables click event) 
+
 - `v-model` ***String*** (*optional*) `default: ''` 
 Set the label (default slot will overwrite this string) 
 

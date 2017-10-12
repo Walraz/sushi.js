@@ -3,7 +3,7 @@
     transition(name="su-anim--scaleIn")
       spinner(:size="size" v-if="loading")
     transition(name="su-anim--fadeDown")
-      div.su-button__content
+      div.su-button__content(:class="[`su-button__content--${align}`]")
         span.su-button__icon-left(:class="{'pl-0' : !isIconLeft}")
           slot(name="icon-left")
         span.su-button__label
@@ -37,6 +37,11 @@ export default {
      * @private
      */
     onClick(e) {
+      if (this.to) {
+        this.$router.push(this.to)
+        return
+      }
+
       if (this.type === 'submit' || this.type === 'reset') return;
       /**
        * Fired on click or when focused on Key press Enter/Space
@@ -150,6 +155,22 @@ export default {
       validator: type => {
         return ['raised', 'flat', 'outlined', 'alert'].includes(type)
       }
+    },
+    /**
+     * Align button content left, right or center
+     */
+    align: {
+      type: String,
+      default: 'center',
+      validator(type) {
+        return ['left', 'center', 'right'].includes(type)
+      }
+    },
+    /**
+     * Uses Vue-router push method to programmatically set destiation (Disables click event)
+     */
+    to: {
+      type: Object,
     },
     /**
      * Set the label (default slot will overwrite this string)
