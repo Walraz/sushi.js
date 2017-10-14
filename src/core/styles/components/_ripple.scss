@@ -1,17 +1,16 @@
-.su-ripple-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    color: inherit;
-    z-index: 0;
-    pointer-events: none;
-    border-radius: inherit;
-}
-
 .su-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: inherit;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+
+  &__wave {
     position: absolute;
     border-radius: 50%;
     top: 0;
@@ -19,14 +18,15 @@
     z-index: 1;
     color: inherit;
     background-color: currentColor;
-    transition: 0.5s transform cubic-bezier(0.2, 0.4, 0.4, 0.9),
-        0.3s opacity cubic-bezier(0.2, 0.4, 0.4, 0.1);
     will-change: transform, opacity;
+    transform-origin: center center;
     opacity: 0;
-    &--enter {
-        transition: none;
+    transform: translate3d(-50%, -50%, 0) scale(0);
+    transition: opacity .3s linear, transform .4s ease-in-out 0s;
+    
+    &--animate {
+      opacity: 0.3;
+      transform:  translate3d(-50%, -50%, 0) scale(3.1);
     }
-    &--visible {
-        opacity: 0.3;
-    }
+  }
 }

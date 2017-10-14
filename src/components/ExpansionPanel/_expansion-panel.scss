@@ -1,0 +1,26 @@
+.su-expansion-panel {
+  
+  &__trigger {
+
+  }
+  &__content {
+    overflow: hidden;
+    pointer-events: auto;
+    transform: scaleY(1);
+    transition: all .2s ease-in-out;
+    transform-origin: top left;
+    border-bottom: 1px solid rgba(#000, .11);
+    border-top: 1px solid rgba(#000, .11);
+
+    &--hidden {
+      transform: scaleY(.75);
+      height: 0px !important;
+      pointer-events: auto;
+      border: 0;
+    }
+  }
+
+  &--expanded {
+    background-color: rgba(#000, .05);
+  }
+}

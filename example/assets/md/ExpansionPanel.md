@@ -1,0 +1,8 @@
+# expansion-panel 
+
+
+
+## methods 
+- `toggleExpansion()` 
+
+

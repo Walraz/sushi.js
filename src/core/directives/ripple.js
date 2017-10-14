@@ -1,64 +1,83 @@
-import throttle from '../utils/throttle'
-import position from '../utils/position'
+import debounce from '../utils/debounce'
 
-const showRipple = (evt, el, stopPropagation) => {
-    if (stopPropagation) evt.stopPropagation()
-    const container = document.createElement('span')
-    const rippleNode = document.createElement('span')
-    container.appendChild(rippleNode)
-    container.className = 'su-ripple-container'
+const isMobile = () => {
+  return window.innerWidth < 420
+}
 
-    const offset = el.getBoundingClientRect()
-    let size = offset.width > offset.height ? offset.width : offset.height
-    size = `${size * 2}px`
-    rippleNode.className = 'su-ripple'
-    rippleNode.style.height = size
-    rippleNode.style.width = size
+let animateRipple = (e, rippleWave) => {
+  const rect = rippleWave.parentNode.getBoundingClientRect()
+  const evt = (e.touches && e.touches[0]) ? e.touches[0] : e
+  const x = Math.round(evt.clientX) - Math.round(rect.left)
+  const y = Math.round(evt.clientY) - Math.round(rect.top)
+  requestAnimationFrame(() => {
+    rippleWave.style.top = `${y}px`
+    rippleWave.style.left = `${x}px`
+    rippleWave.classList.add('su-ripple__wave--animate')
+  })
+}
 
-    const pos = position(evt)
-    const x = pos.left - offset.left
-    const y = pos.top - offset.top
+const createRipple = el => {
+  const rect = el.getBoundingClientRect()
+  const rippleContainer = document.createElement('span')
+  const rippleWave = document.createElement('span')
+  rippleContainer.classList.add('su-ripple')
+  rippleWave.classList.add('su-ripple__wave')
+  const size = Math.round(rect.width > rect.height ? rect.width : rect.height)
+  rippleWave.style.height = `${size}px`
+  rippleWave.style.width = `${size}px`
 
-    rippleNode.classList.add('su-ripple--enter', 'su-ripple--visible')
-    rippleNode.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(.001)`
+  const removeWave = () => {
+    rippleWave.removeEventListener('transitionend', removeWave)
+    requestAnimationFrame(() => {
+      rippleWave.classList.remove('su-ripple__wave--animate')
+    })
+  }
 
-    el.appendChild(container)
+  const click = (evt) => {
+    rippleWave.addEventListener('transitionend', removeWave)
+    animateRipple(evt, rippleWave)
+  }
 
-    setTimeout(() => {
-        rippleNode.classList.remove('su-ripple--enter')
-        rippleNode.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`
-        setTimeout(() => {
-            rippleNode.classList.remove('su-ripple--visible')
-            setTimeout(() => {
-                rippleNode.parentNode.remove()
-            }, 300)
-        }, 400)
-    }, 25)
+  el.__ripple = {
+    click,
+  }
+
+  rippleContainer.appendChild(rippleWave)
+
+  requestAnimationFrame(() => {
+    el.appendChild(rippleContainer)
+
+    if (isMobile())
+      el.addEventListener('touchstart', debounce(el.__ripple.click, 100), false)
+    else
+      el.addEventListener('mousedown', el.__ripple.click, false)
+  })
+}
+
+const removeRipple = el => {
+  const ripple = el.querySelector('.su-ripple');
+  if (ripple) el.removeChild(ripple)
+  requestAnimationFrame(() => {
+    el.removeEventListener('touchstart', el.__ripple.click)
+    el.removeEventListener('mousedown', el.__ripple.click)
+    delete el.__ripple
+  })
+
 }
 
 export default {
-    name: 'ripple',
-    inserted(el, { value, modifiers }) {
-        const ctx = {
-            enabled: value !== false,
-            click(evt) {
-                if (ctx.enabled) {
-                    showRipple(evt, el, modifiers.stop)
-                }
-            },
-        }
+  name: 'ripple',
 
-        el.__ripple = ctx
-        el.addEventListener('mousedown', throttle(ctx.click, 100), false)
-    },
-    update(el, { value, oldValue }) {
-        if (el.__ripple && value !== oldValue) {
-            el.__ripple.enabled = value !== false
-        }
-    },
-    unbind(el, { modifiers }) {
-        const ctx = el.__ripple
-        el.removeEventListener('click', ctx.click, false)
-        delete el.__ripple
-    },
+  inserted(el, { value, modifiers }) {
+    if (value && !el.__ripple) createRipple(el)
+  },
+
+  update(el, { value }) {
+    if (value && !el.__ripple) createRipple(el)
+    else if (!value && el.__ripple) removeRipple(el)
+  },
+
+  unbind(el) {
+    if (el.__ripple) removeRipple(el)
+  }
 }

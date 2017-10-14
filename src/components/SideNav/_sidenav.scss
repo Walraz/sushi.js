@@ -7,6 +7,7 @@
   overflow: hidden;
   pointer-events: none;
   z-index: 9999;
+
   &::before {
     content: '';
     display: block;
@@ -18,17 +19,17 @@
     background: rgba(#000,0.7);
     opacity: 0;
     will-change: opacity;
-    transition: opacity 0.3s cubic-bezier(0,0,0.3,1);
+    transition: opacity 0.25s cubic-bezier(0,0,0.3,1);
   }
+
   nav {
     position: relative;
     width: 90%;
     max-width: 320px;
     background: #FFF;
     height: 100%;
-    box-shadow: 2px 0 12px rgba(0,0,0,0.4);
-    transform: translateX(-102%);
-    transition: transform .145s  cubic-bezier(0,0,0.3,1);
+    transform: translateX(-100%);
+    transition: transform .25s  cubic-bezier(0,0,0.3,1);
     display: flex;
     flex-direction: column;
     will-change: transform;
@@ -40,6 +41,12 @@
     height: 64px;
     background-color: theme(primary);
   }
+
+  content {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
   &--visible {
     pointer-events: auto;
     &:before {
@@ -47,7 +54,6 @@
     }
     nav {
       transform: translateX(0);
-      overflow: scroll;
     }
   }
 }

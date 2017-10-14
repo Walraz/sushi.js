@@ -4,12 +4,14 @@
       spinner(:size="size" v-if="loading")
     transition(name="su-anim--fadeDown")
       div.su-button__content(:class="[`su-button__content--${align}`]")
-        span.su-button__icon-left(:class="{'pl-0' : !isIconLeft}")
+        span.su-button__icon-left(v-if="isIconLeft")
           slot(name="icon-left")
         span.su-button__label
           slot {{ value }}
-        span.su-button__icon-right(:class="{'pr-0' : !isIconRight}")
-          slot(name="icon-right") 
+        span.su-button__icon-right(v-if="isIconRight")
+          slot(name="icon-right")
+        span.su-button__badge(v-if="isBadge")
+          slot(name="badge")
 </template>
 
 <script>
@@ -29,6 +31,7 @@ export default {
     return {
       isIconLeft: Boolean(this.$slots['icon-left']),
       isIconRight: Boolean(this.$slots['icon-right']),
+      isBadge: Boolean(this.$slots['badge']),
     }
   },
 

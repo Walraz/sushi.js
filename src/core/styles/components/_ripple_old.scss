@@ -1,0 +1,32 @@
+.su-ripple-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: inherit;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.su-ripple {
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    color: inherit;
+    background-color: currentColor;
+    transition: 0.3s transform cubic-bezier(0.2, 0.4, 0.4, 0.9),
+        0.3s opacity cubic-bezier(0.2, 0.4, 0.4, 0.1);
+    will-change: transform, opacity;
+    opacity: 0;
+    &--enter {
+        transition: none;
+    }
+    &--visible {
+        opacity: 0.3;
+    }
+}

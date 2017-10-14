@@ -3,7 +3,7 @@
     nav(@click="blockClick")
       header
         slot(name="header")
-      main(@click="closeSideNav")
+      main(v-if="isVisible")
         slot
 </template>
 

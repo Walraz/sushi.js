@@ -1,6 +1,6 @@
 // Scale in
 .su-anim--scaleIn-enter-active, .su-anim--scaleIn-leave-active {
-  transition: transform .4s
+  transition: transform .15s
 }
 .su-anim--scaleIn-enter, .su-anim--scaleIn-leave-to {
   transform: scale(0)
@@ -8,7 +8,7 @@
 
 // Fade Down
 .su-anim--fadeDown-enter-active, .su-anim--fadeDown-leave-active {
-  transition: transform .4s, opacity .4s
+  transition: transform .15s, opacity .4s
 }
 .su-anim--fadeDown-enter, .su-anim--fadeDown-leave-to {
   transform: translateY(8px);
@@ -17,7 +17,7 @@
 
 // Fade Right
 .su-anim--fadeRight-enter-active, .su-anim--fadeRight-leave-active {
-  transition: transform .25s, opacity .4s
+  transition: transform .15s, opacity .4s
 }
 .su-anim--fadeRight-enter, .su-anim--fadeRight-leave-to {
   transform: translateX(16px);

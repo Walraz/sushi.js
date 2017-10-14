@@ -286,6 +286,11 @@ $size-xlarge: 64px;
         display: inline-flex;
     }
 
+    &__badge {
+        flex-grow: 1;
+        text-align: right;
+    }
+
     &--loading {
         pointer-events: none;
         .su-button__content {

@@ -11,7 +11,14 @@
     v-side-nav(v-model="showSidenav")
       v-button(slot="header" rounded icon contrast @click="toggleSidenav")
         v-icon arrow_back
-      v-button(align="left" block squared :to="{ path: '/button' }") Button
+
+      v-expansion-panel
+        v-button(slot="trigger" align="left" block squared :to="{ path: '/button' }")
+          | Button
+          v-icon(slot="badge") keyboard_arrow_down
+        v-button(squared block align="left") Test 1
+        v-button(squared block align="left") Test 2
+        v-button(squared block align="left") Test 3
       v-button(align="left" block squared :to="{ path: '/icon' }") Icon
 
     transition(name="su-anim--fadeRight" mode="out-in")
