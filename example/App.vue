@@ -20,6 +20,24 @@
         v-button(squared block align="left") Test 2
         v-button(squared block align="left") Test 3
       v-button(align="left" block squared :to="{ path: '/icon' }") Icon
+      v-expansion-panel
+        v-button(slot="trigger" align="left" block squared :to="{ path: '/button' }")
+            v-icon(slot="icon-left" size="medium") bookmark
+            | Button
+            v-icon(slot="badge") keyboard_arrow_down
+        v-button.pl-3(squared block align="left") Test 1
+        v-button.pl-3(squared block align="left") Test 2
+        v-button.pl-3(squared block align="left") Test 3
+        v-button.pl-3(squared block align="left") Test 1
+        v-button.pl-3(squared block align="left") Test 2
+        v-button.pl-3(squared block align="left") Test 3
+      v-expansion-panel
+        v-button(slot="trigger" align="left" block squared :to="{ path: '/button' }")
+            | Button
+            v-icon(slot="badge") keyboard_arrow_down
+        v-button(squared block align="left") Test 1
+        v-button(squared block align="left") Test 2
+        v-button(squared block align="left") Test 3
 
     transition(name="su-anim--fadeRight" mode="out-in")
       router-view

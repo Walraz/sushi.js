@@ -3,8 +3,9 @@
     nav(@click="blockClick")
       header
         slot(name="header")
-      main(v-if="isVisible")
-        slot
+      transition(name="su-anim--fadeRightSlow")
+        main(v-if="isVisible")
+          slot
 </template>
 
 <script>

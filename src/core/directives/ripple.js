@@ -4,80 +4,101 @@ const isMobile = () => {
   return window.innerWidth < 420
 }
 
-let animateRipple = (e, rippleWave) => {
-  const rect = rippleWave.parentNode.getBoundingClientRect()
+const getPosition = (e, rect) => {
   const evt = (e.touches && e.touches[0]) ? e.touches[0] : e
   const x = Math.round(evt.clientX) - Math.round(rect.left)
   const y = Math.round(evt.clientY) - Math.round(rect.top)
-  requestAnimationFrame(() => {
-    rippleWave.style.top = `${y}px`
-    rippleWave.style.left = `${x}px`
-    rippleWave.classList.add('su-ripple__wave--animate')
-  })
+  return { x, y }
 }
 
-const createRipple = el => {
+const getDpi = () => {
+  return window.devicePixelRatio
+}
+
+const getSize = (el) => {
   const rect = el.getBoundingClientRect()
-  const rippleContainer = document.createElement('span')
-  const rippleWave = document.createElement('span')
-  rippleContainer.classList.add('su-ripple')
-  rippleWave.classList.add('su-ripple__wave')
-  const size = Math.round(rect.width > rect.height ? rect.width : rect.height)
-  rippleWave.style.height = `${size}px`
-  rippleWave.style.width = `${size}px`
-
-  const removeWave = () => {
-    rippleWave.removeEventListener('transitionend', removeWave)
-    requestAnimationFrame(() => {
-      rippleWave.classList.remove('su-ripple__wave--animate')
-    })
+  return {
+    width: el.clientWidth,
+    height: el.clientHeight,
+    left: rect.left,
+    top: rect.top,
   }
-
-  const click = (evt) => {
-    rippleWave.addEventListener('transitionend', removeWave)
-    animateRipple(evt, rippleWave)
-  }
-
-  el.__ripple = {
-    click,
-  }
-
-  rippleContainer.appendChild(rippleWave)
-
-  requestAnimationFrame(() => {
-    el.appendChild(rippleContainer)
-
-    if (isMobile())
-      el.addEventListener('touchstart', debounce(el.__ripple.click, 100), false)
-    else
-      el.addEventListener('mousedown', el.__ripple.click, false)
-  })
 }
 
-const removeRipple = el => {
-  const ripple = el.querySelector('.su-ripple');
-  if (ripple) el.removeChild(ripple)
+const initRipple = (el) => {
+  const rect = getSize(el)
+  const container = document.createElement('canvas')
+  const dpi = 1
+  container.classList.add('su-ripple')
+  container.style.width = `${rect.width}px`
+  container.style.height = `${rect.height}px`
+  container.setAttribute('width', rect.width * dpi)
+  container.setAttribute('height', rect.height * dpi)
+  const ctx = container.getContext('2d')
+  ctx.scale(dpi, dpi)
+  el.appendChild(container)
+
+  return { ctx, container }
+}
+
+const createRipple = (evt, el, modifiers) => {
+  if (modifiers.stop) evt.stopPropagation()
+
+  const rect = el.__ripple.rect
+  const ctx = el.__ripple.ctx
+  let color = '#000'
+  let pos = {}
+
   requestAnimationFrame(() => {
-    el.removeEventListener('touchstart', el.__ripple.click)
-    el.removeEventListener('mousedown', el.__ripple.click)
-    delete el.__ripple
+    color = window.getComputedStyle(el, null).getPropertyValue('color')
+    pos = getPosition(evt, getSize(el))
   })
 
+  const maxSize = Math.round((rect.width > rect.height ? rect.width : rect.height) * 2)
+  let initSize = 0
+
+  const createWave = () => {
+    initSize += Math.round((maxSize / 50))
+
+    ctx.clearRect(0, 0, rect.width, rect.height)
+    ctx.globalAlpha = .3 - (initSize / maxSize) * .3
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, initSize, 0, 2 * Math.PI)
+    ctx.fillStyle = color
+    ctx.fill();
+    if (initSize >= maxSize) cancelAnimationFrame(animationLoop)
+    else requestAnimationFrame(createWave)
+  }
+
+  const animationLoop = requestAnimationFrame(createWave)
 }
 
 export default {
   name: 'ripple',
 
   inserted(el, { value, modifiers }) {
-    if (value && !el.__ripple) createRipple(el)
-  },
+    if (!value) return
 
-  update(el, { value }) {
-    if (value && !el.__ripple) createRipple(el)
-    else if (!value && el.__ripple) removeRipple(el)
+    const { ctx, container } = initRipple(el)
+
+    el.__ripple = {
+      ctx,
+      container,
+      rect: getSize(el),
+      click: (evt) => {
+        createRipple(evt, el, modifiers)
+      }
+    }
+
+    if (isMobile()) el.addEventListener('touchstart', debounce(el.__ripple.click, 100))
+    else el.addEventListener('mousedown', debounce(el.__ripple.click, 100))
   },
 
   unbind(el) {
-    if (el.__ripple) removeRipple(el)
+    if (!el.__ripple) return
+    el.removeEventListener('mousedown', el.__ripple.click)
+    el.removeEventListener('touchstart', el.__ripple.click)
+    el.__ripple.container.parentNode.removeChild(el.__ripple.container)
+    delete el.__ripple
   }
 }

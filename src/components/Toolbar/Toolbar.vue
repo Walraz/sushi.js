@@ -31,10 +31,10 @@ export default {
     }
   },
 
-  mounted() {
-    const toolbarsFixed = document.querySelectorAll('.su-toolbar--fixed')
-    console.dir(toolbarsFixed)
-  },
+  // mounted() {
+  //   const toolbarsFixed = document.querySelectorAll('.su-toolbar--fixed')
+  //   console.dir(toolbarsFixed)
+  // },
 
   props: {
     sticky: Boolean,

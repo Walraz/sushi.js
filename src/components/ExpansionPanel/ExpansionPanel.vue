@@ -34,7 +34,6 @@ export default {
   methods: {
     toggleExpansion() {
       this.isExpanded = !this.isExpanded
-      console.log('toggle')
     }
   }
 }

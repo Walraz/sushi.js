@@ -17,9 +17,21 @@
 
 // Fade Right
 .su-anim--fadeRight-enter-active, .su-anim--fadeRight-leave-active {
-  transition: transform .15s, opacity .4s
+  transition: transform .15s, opacity .2s
 }
 .su-anim--fadeRight-enter, .su-anim--fadeRight-leave-to {
   transform: translateX(16px);
+  opacity: 0;
+}
+
+// Fade Right
+.su-anim--fadeRightSlow-leave-active {
+  transition: transform .1s, opacity .1s
+}
+.su-anim--fadeRightSlow-enter-active {
+  transition: transform .3s cubic-bezier(0,0,0,.3), opacity .7s ease
+}
+.su-anim--fadeRightSlow-enter, .su-anim--fadeRightSlow-leave-to {
+  transform: translateX(-50px);
   opacity: 0;
 }
