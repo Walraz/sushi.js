@@ -15,12 +15,14 @@ const cleanUp = el => {
   el.addEventListener('touchstart', el.__ripple.click, false)
 }
 
-const idleRipple = el => {
-  if (el.__ripple.container)
-    el.__ripple.container.parentElement.removeChild(el.__ripple.container)
-  el.__ripple.container = null
-  el.__ripple.waves = []
-  el.__ripple.booted = false
+const idleRipple = ctx => {
+  if (ctx.container) {
+    ctx.container.parentElement.removeChild(ctx.container)
+    ctx.container = null
+    delete ctx.waves
+    ctx.waves = []
+    ctx.booted = false
+  }
 }
 
 const initRipple = el => {
@@ -68,16 +70,15 @@ const createWave = (evt, el) => {
       wave.style = ''
       ctx.animating = false
       clearTimeout(id)
+      idleTimeout = setTimeout(() => {
+        if (!ctx.animating && ctx.booted) idleRipple(ctx)
+        clearTimeout(idleTimeout)
+      }, ctx.maxWaves * ctx.duration + 1000)
     }, ctx.duration)
   })
 
   ctx.current++
   if (ctx.current === ctx.maxWaves) ctx.current = 0
-
-  idleTimeout = setTimeout(() => {
-    clearTimeout(idleTimeout)
-    if (!ctx.animating) idleRipple(el)
-  }, ctx.maxWaves * ctx.duration + 200)
 }
 
 export default {
