@@ -9,4 +9,28 @@
   z-index: 0;
   pointer-events: none;
   border-radius: inherit;
+
+  &__wave {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    background: currentColor;
+    border-radius: 50%;
+    will-change: opacity, transform;
+    &--animate {
+      animation: ripple 0.5s cubic-bezier(0.15, 0.36, 0.83, 0.55);
+      @keyframes ripple {
+        0% {
+          transform: scale(0);
+          opacity: 0.3;
+        }
+
+        100% {
+          opacity: 0;
+          transform: scale(2);
+        }
+      }
+    }
+  }
 }

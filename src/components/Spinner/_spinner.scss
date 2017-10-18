@@ -17,29 +17,30 @@ $spinner-size-xlarge: 42px;
   &__svg {
     animation: su-animation--rotate 2s linear infinite;
     transform-origin: center center;
+    will-change: transform;
   }
 
-  &--xsmall>.su-spinner__svg {
+  &--xsmall > .su-spinner__svg {
     height: $spinner-size-xsmall;
     width: $spinner-size-xsmall;
   }
 
-  &--small>.su-spinner__svg {
+  &--small > .su-spinner__svg {
     height: $spinner-size-small;
     width: $spinner-size-small;
   }
 
-  &--medium>.su-spinner__svg {
+  &--medium > .su-spinner__svg {
     height: $spinner-size-medium;
     width: $spinner-size-medium;
   }
 
-  &--large>.su-spinner__svg {
+  &--large > .su-spinner__svg {
     height: $spinner-size-large;
     width: $spinner-size-large;
   }
 
-  &--xlarge>.su-spinner__svg {
+  &--xlarge > .su-spinner__svg {
     height: $spinner-size-xlarge;
     width: $spinner-size-xlarge;
   }

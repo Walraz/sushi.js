@@ -1,104 +1,117 @@
-import debounce from '../utils/debounce'
-
 const isMobile = () => {
-  return window.innerWidth < 420
+  return 'createTouch' in document
 }
 
-const getPosition = (e, rect) => {
-  const evt = (e.touches && e.touches[0]) ? e.touches[0] : e
-  const x = Math.round(evt.clientX) - Math.round(rect.left)
-  const y = Math.round(evt.clientY) - Math.round(rect.top)
-  return { x, y }
+const setEventListener = el => {
+  window.removeEventListener('resize', el.__ripple.resize)
+  window.addEventListener('resize', el.__ripple.resize)
+
+  if (isMobile()) el.addEventListener('touchstart', el.__ripple.click, false)
+  else el.addEventListener('mousedown', el.__ripple.click, false)
 }
 
-const getDpi = () => {
-  return window.devicePixelRatio
+const cleanUp = el => {
+  el.removeEventListener('mousedown', el.__ripple.click, false)
+  el.addEventListener('touchstart', el.__ripple.click, false)
 }
 
-const getSize = (el) => {
-  const rect = el.getBoundingClientRect()
-  return {
-    width: el.clientWidth,
-    height: el.clientHeight,
-    left: rect.left,
-    top: rect.top,
-  }
+const idleRipple = el => {
+  if (el.__ripple.container)
+    el.__ripple.container.parentElement.removeChild(el.__ripple.container)
+  el.__ripple.container = null
+  el.__ripple.waves = []
+  el.__ripple.booted = false
 }
 
-const initRipple = (el) => {
-  const rect = getSize(el)
-  const container = document.createElement('canvas')
-  const dpi = 1
+const initRipple = el => {
+  const container = document.createElement('span')
   container.classList.add('su-ripple')
-  container.style.width = `${rect.width}px`
-  container.style.height = `${rect.height}px`
-  container.setAttribute('width', rect.width * dpi)
-  container.setAttribute('height', rect.height * dpi)
-  const ctx = container.getContext('2d')
-  ctx.scale(dpi, dpi)
-  el.appendChild(container)
 
-  return { ctx, container }
+  for (let i = 0; i < el.__ripple.maxWaves; i++) {
+    const wave = document.createElement('span')
+    wave.classList.add('su-ripple__wave')
+    container.appendChild(wave)
+    el.__ripple.waves.push(wave)
+  }
+
+  el.appendChild(container)
+  el.__ripple.container = container
+  el.__ripple.booted = true
 }
 
-const createRipple = (evt, el, modifiers) => {
-  if (modifiers.stop) evt.stopPropagation()
+const getRect = (evt, el) => {
+  const rect = el.getBoundingClientRect()
+  const size = Math.round(Math.max(rect.width, rect.height))
+  const event = evt.touches && evt.touches[0] ? evt.touches[0] : evt
+  const x = Math.round(event.clientX - rect.left)
+  const y = Math.round(event.clientY - rect.top)
+  return { x, y, size }
+}
 
-  const rect = el.__ripple.rect
-  const ctx = el.__ripple.ctx
-  let color = '#000'
-  let pos = {}
+const createWave = (evt, el) => {
+  const ctx = el.__ripple
+  if (ctx.stop) evt.stopPropagation()
+  if (!ctx.booted) initRipple(el)
+  let idleTimeout = null
+  const rect = getRect(evt, el)
+  const wave = ctx.waves[ctx.current]
 
   requestAnimationFrame(() => {
-    color = window.getComputedStyle(el, null).getPropertyValue('color')
-    pos = getPosition(evt, getSize(el))
+    ctx.animating = true
+    wave.style.width = `${rect.size}px`
+    wave.style.height = `${rect.size}px`
+    wave.style.left = `${rect.x - Math.round(rect.size / 2)}px`
+    wave.style.top = `${rect.y - Math.round(rect.size / 2)}px`
+    wave.classList.add('su-ripple__wave--animate')
+    const id = setTimeout(() => {
+      wave.classList.remove('su-ripple__wave--animate')
+      wave.style = ''
+      ctx.animating = false
+      clearTimeout(id)
+    }, ctx.duration)
   })
 
-  const maxSize = Math.round((rect.width > rect.height ? rect.width : rect.height) * 2)
-  let initSize = 0
+  ctx.current++
+  if (ctx.current === ctx.maxWaves) ctx.current = 0
 
-  const createWave = () => {
-    initSize += Math.round((maxSize / 50))
-
-    ctx.clearRect(0, 0, rect.width, rect.height)
-    ctx.globalAlpha = .3 - (initSize / maxSize) * .3
-    ctx.beginPath();
-    ctx.arc(pos.x, pos.y, initSize, 0, 2 * Math.PI)
-    ctx.fillStyle = color
-    ctx.fill();
-    if (initSize >= maxSize) cancelAnimationFrame(animationLoop)
-    else requestAnimationFrame(createWave)
-  }
-
-  const animationLoop = requestAnimationFrame(createWave)
+  idleTimeout = setTimeout(() => {
+    clearTimeout(idleTimeout)
+    if (!ctx.animating) idleRipple(el)
+  }, ctx.maxWaves * ctx.duration + 200)
 }
 
 export default {
   name: 'ripple',
 
   inserted(el, { value, modifiers }) {
-    if (!value) return
-
-    const { ctx, container } = initRipple(el)
-
     el.__ripple = {
-      ctx,
-      container,
-      rect: getSize(el),
-      click: (evt) => {
-        createRipple(evt, el, modifiers)
-      }
+      enabled: Boolean(value),
+      animating: false,
+      booted: false,
+      duration: 500,
+      container: null,
+      maxWaves: 4,
+      waves: [],
+      current: 0,
+      stop: modifiers.stop,
+      resize(evt) {
+        cleanUp(el)
+        setEventListener(el)
+      },
+      click(evt) {
+        if (!el.__ripple.enabled) return
+        createWave(evt, el)
+      },
     }
 
-    if (isMobile()) el.addEventListener('touchstart', debounce(el.__ripple.click, 100))
-    else el.addEventListener('mousedown', debounce(el.__ripple.click, 100))
+    setEventListener(el)
+  },
+
+  updated(el, { value }) {
+    el.__ripple.enabled = Boolean(value)
   },
 
   unbind(el) {
-    if (!el.__ripple) return
-    el.removeEventListener('mousedown', el.__ripple.click)
-    el.removeEventListener('touchstart', el.__ripple.click)
-    el.__ripple.container.parentNode.removeChild(el.__ripple.container)
-    delete el.__ripple
-  }
+    cleanUp(el)
+  },
 }
