@@ -45,12 +45,12 @@ export default {
         return
       }
 
-      if (this.type === 'submit' || this.type === 'reset') return;
+      if (this.type === 'submit' || this.type === 'reset') return
       /**
        * Fired on click or when focused on Key press Enter/Space
        */
       this.$emit('click', e)
-    }
+    },
   },
 
   computed: {
@@ -147,7 +147,7 @@ export default {
       default: 'button',
       validator: type => {
         return ['submit', 'button', 'reset'].includes(type)
-      }
+      },
     },
     /**
      * Set the theme of the button ['raised', 'flat', 'outlined', 'alert']
@@ -157,7 +157,7 @@ export default {
       default: 'flat',
       validator: type => {
         return ['raised', 'flat', 'outlined', 'alert'].includes(type)
-      }
+      },
     },
     /**
      * Align button content left, right or center
@@ -167,7 +167,7 @@ export default {
       default: 'center',
       validator(type) {
         return ['left', 'center', 'right'].includes(type)
-      }
+      },
     },
     /**
      * Uses Vue-router push method to programmatically set destiation (Disables click event)
@@ -183,6 +183,6 @@ export default {
       type: String,
       default: '',
     },
-  }
+  },
 }
 </script>

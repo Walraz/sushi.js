@@ -2,25 +2,10 @@ const isMobile = () => {
   return 'createTouch' in document
 }
 
-const setEventListener = el => {
-  window.removeEventListener('resize', el.__ripple.resize)
-  window.addEventListener('resize', el.__ripple.resize)
-
-  if (isMobile()) el.addEventListener('touchstart', el.__ripple.click, false)
-  else el.addEventListener('mousedown', el.__ripple.click, false)
-}
-
-const cleanUp = el => {
-  el.removeEventListener('mousedown', el.__ripple.click, false)
-  el.addEventListener('touchstart', el.__ripple.click, false)
-}
-
-const idleRipple = ctx => {
+const removeRipple = ctx => {
   if (ctx.container) {
     ctx.container.parentElement.removeChild(ctx.container)
     ctx.container = null
-    delete ctx.waves
-    ctx.waves = []
     ctx.booted = false
   }
 }
@@ -28,13 +13,6 @@ const idleRipple = ctx => {
 const initRipple = el => {
   const container = document.createElement('span')
   container.classList.add('su-ripple')
-
-  for (let i = 0; i < el.__ripple.maxWaves; i++) {
-    const wave = document.createElement('span')
-    wave.classList.add('su-ripple__wave')
-    container.appendChild(wave)
-    el.__ripple.waves.push(wave)
-  }
 
   el.appendChild(container)
   el.__ripple.container = container
@@ -50,35 +28,40 @@ const getRect = (evt, el) => {
   return { x, y, size }
 }
 
-const createWave = (evt, el) => {
+const initWave = (evt, el) => {
   const ctx = el.__ripple
   if (ctx.stop) evt.stopPropagation()
   if (!ctx.booted) initRipple(el)
-  let idleTimeout = null
+
   const rect = getRect(evt, el)
-  const wave = ctx.waves[ctx.current]
+  const wave = document.createElement('span')
+  wave.classList.add('su-ripple__wave')
+
+  const preQue = () => {
+    wave.style.willChange = 'transform, opacity'
+    wave.removeEventListener('animationstart', preQue)
+  }
+
+  const removeQue = () => {
+    ctx.que--
+    wave.removeEventListener('animationend', removeQue)
+    wave.style.willChange = 'auto'
+    if (ctx.que === 0 && ctx.booted) removeRipple(ctx)
+  }
+
+  wave.addEventListener('animationstart', preQue)
+  wave.addEventListener('animationend', removeQue)
+
+  ctx.container.appendChild(wave)
 
   requestAnimationFrame(() => {
-    ctx.animating = true
+    ctx.que++
     wave.style.width = `${rect.size}px`
     wave.style.height = `${rect.size}px`
     wave.style.left = `${rect.x - Math.round(rect.size / 2)}px`
     wave.style.top = `${rect.y - Math.round(rect.size / 2)}px`
     wave.classList.add('su-ripple__wave--animate')
-    const id = setTimeout(() => {
-      wave.classList.remove('su-ripple__wave--animate')
-      wave.style = ''
-      ctx.animating = false
-      clearTimeout(id)
-      idleTimeout = setTimeout(() => {
-        if (!ctx.animating && ctx.booted) idleRipple(ctx)
-        clearTimeout(idleTimeout)
-      }, ctx.maxWaves * ctx.duration + 1000)
-    }, ctx.duration)
   })
-
-  ctx.current++
-  if (ctx.current === ctx.maxWaves) ctx.current = 0
 }
 
 export default {
@@ -87,25 +70,18 @@ export default {
   inserted(el, { value, modifiers }) {
     el.__ripple = {
       enabled: Boolean(value),
-      animating: false,
       booted: false,
-      duration: 500,
       container: null,
-      maxWaves: 4,
-      waves: [],
-      current: 0,
+      que: 0,
       stop: modifiers.stop,
-      resize(evt) {
-        cleanUp(el)
-        setEventListener(el)
-      },
       click(evt) {
         if (!el.__ripple.enabled) return
-        createWave(evt, el)
+        initWave(evt, el)
       },
     }
 
-    setEventListener(el)
+    if (isMobile()) el.addEventListener('touchstart', el.__ripple.click, false)
+    else el.addEventListener('mousedown', el.__ripple.click, false)
   },
 
   updated(el, { value }) {
@@ -113,6 +89,7 @@ export default {
   },
 
   unbind(el) {
-    cleanUp(el)
+    el.removeEventListener('mousedown', el.__ripple.click, false)
+    el.addEventListener('touchstart', el.__ripple.click, false)
   },
 }

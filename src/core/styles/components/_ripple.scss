@@ -17,18 +17,17 @@
     left: 0;
     background: currentColor;
     border-radius: 50%;
-    will-change: opacity, transform;
     &--animate {
       animation: ripple 0.5s cubic-bezier(0.15, 0.36, 0.83, 0.55);
       @keyframes ripple {
         0% {
-          transform: scale(0);
+          transform: scale3d(0, 0, 0);
           opacity: 0.3;
         }
 
         100% {
           opacity: 0;
-          transform: scale(2);
+          transform: scale3d(2, 2, 2);
         }
       }
     }
