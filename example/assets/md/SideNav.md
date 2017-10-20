@@ -8,6 +8,8 @@ Conditional set visible state
 
 
 ## methods 
+- `setFocus()` 
+
 - `blockClick()` 
 
 - `closeSideNav()` 
