@@ -1,5 +1,5 @@
 <template lang="pug">
-  aside(:class="classList" @click="closeSideNav")
+  aside(:class="classList" @click="closeSideNav" tabindex="-1" @keyup.esc="closeSideNav")
     nav(@click="blockClick")
       header
         slot(name="header")
@@ -18,28 +18,30 @@ export default {
   computed: {
     isVisible: {
       get() {
+        this.setFocus(this.value)
         return this.value
       },
       set(value) {
+        this.setFocus(value)
         this.$emit('input', value)
-      }
+      },
     },
 
     classList() {
-      return [
-        'su-side-nav',
-        this.isVisible && 'su-side-nav--visible'
-      ]
-    }
+      return ['su-side-nav', this.isVisible && 'su-side-nav--visible']
+    },
   },
 
   methods: {
+    setFocus(value) {
+      if (value) this.$el.focus()
+    },
     blockClick(e) {
-      e.stopPropagation();
+      e.stopPropagation()
     },
     closeSideNav() {
       this.isVisible = false
-    }
+    },
   },
 
   props: {
@@ -50,7 +52,7 @@ export default {
     value: {
       type: Boolean,
       default: false,
-    }
-  }
+    },
+  },
 }
 </script>

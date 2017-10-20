@@ -203,26 +203,31 @@ $size-xlarge: 64px;
   &--xsmall {
     font-size: 10px;
     height: $size-xsmall;
+    min-width: $size-xsmall;
   }
 
   &--small {
     font-size: 12px;
     height: $size-small;
+    min-width: $size-small;
   }
 
   &--medium {
     font-size: 14px;
     height: $size-medium;
+    min-width: $size-medium;
   }
 
   &--large {
     font-size: 14px;
     height: $size-large;
+    min-width: $size-large;
   }
 
   &--xlarge {
     font-size: 18px;
     height: $size-xlarge;
+    min-width: $size-xlarge;
   }
 
   &:disabled {

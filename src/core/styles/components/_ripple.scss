@@ -17,6 +17,7 @@
     left: 0;
     background: currentColor;
     border-radius: 50%;
+    transform: translateZ(0);
     &--animate {
       animation: ripple 0.5s cubic-bezier(0.15, 0.36, 0.83, 0.55);
       @keyframes ripple {
